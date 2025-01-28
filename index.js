@@ -1,6 +1,6 @@
 // Server
 const express = require("express");
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const app = express();
 
@@ -23,6 +23,27 @@ const sequelize = new Sequelize("duler", "root", "", {
     host: "localhost",
     dialect: "mysql"
 });
+
+// Tạo model
+const Task = sequelize.define("Task", {
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    status: {
+        type: DataTypes.STRING
+    }
+});
+
+// Đồng bộ model
+const syncModel = async () => {
+    await Task.sync({ force: true }); // Xóa bảng cũ và tạo bảng mới
+    // Task.sync({ alter: true }); // Sửa bảng
+
+    console.log("Sync task model successfully");
+}
+
+syncModel();
 
 const checkConnect = async () => {
     try {
