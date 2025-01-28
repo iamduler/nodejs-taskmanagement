@@ -49,7 +49,14 @@ const createTask = async (name, status) => {
     })
 }
 
-createTask("Học PHP", "New");
+// createTask("Học PHP", "New");
+
+const getAllTask = async () => {
+    const taskList = await Task.findAll();
+    console.log(JSON.stringify(taskList, null, 2));
+}
+
+getAllTask();
 
 // Đồng bộ model
 const syncModel = async () => {
