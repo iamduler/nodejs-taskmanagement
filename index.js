@@ -68,7 +68,22 @@ const getTaskById = async (id) => {
     console.log(JSON.stringify(task, null, 2));
 }
 
-getTaskById(2);
+// getTaskById(2);
+
+const updateTaskById = async (id, data) => {
+    await Task.update(
+        data,
+        {
+            where: {
+                id
+            }
+        }
+    );
+}
+
+updateTaskById(1, {
+    status: "Pending"
+});
 
 // Đồng bộ model
 const syncModel = async () => {
