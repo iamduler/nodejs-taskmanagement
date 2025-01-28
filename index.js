@@ -35,6 +35,22 @@ const Task = sequelize.define("Task", {
     }
 });
 
+const createTask = async (name, status) => {
+    // C1:
+    const newTask1 = Task.build({
+        name, status
+    });
+
+    await newTask1.save();
+
+    // C2:
+    const newTask2 = await Task.create({
+        name, status
+    })
+}
+
+createTask("Học PHP", "New");
+
 // Đồng bộ model
 const syncModel = async () => {
     await Task.sync({ force: true }); // Xóa bảng cũ và tạo bảng mới
@@ -43,7 +59,7 @@ const syncModel = async () => {
     console.log("Sync task model successfully");
 }
 
-syncModel();
+// syncModel();
 
 const checkConnect = async () => {
     try {
