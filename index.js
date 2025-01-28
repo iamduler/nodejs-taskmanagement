@@ -81,9 +81,21 @@ const updateTaskById = async (id, data) => {
     );
 }
 
-updateTaskById(1, {
-    status: "Pending"
-});
+// updateTaskById(1, {
+//     status: "Pending"
+// });
+
+const deleteTaskById = async (id) => {
+    await Task.destroy(
+        {
+            where: {
+                id
+            }
+        }
+    );
+}
+
+deleteTaskById(1);
 
 // Đồng bộ model
 const syncModel = async () => {
